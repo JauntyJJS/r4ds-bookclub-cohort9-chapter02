@@ -5,7 +5,8 @@ title: |
 author: Jeremy Selva <br> [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS) [`r fontawesome::fa(name = "linkedin")`](https://www.linkedin.com/in/jeremy-selva-085b9112a/) [`r fontawesome::fa(name = "link")`](https://jeremy-selva.netlify.app/) [`r fontawesome::fa(name = "twitter")`](https://twitter.com/JauntyJJS)
 format:
   revealjs:
-    theme: [moon, custom.scss]
+    theme: [dark, custom.scss]
+    controls: true
     slide-number: true
     scrollable: true
     preview-links: auto
@@ -25,6 +26,7 @@ This chapter shows how to visualise data using `ggplot2`. Ensure these libraries
 library(tidyverse)
 library(palmerpenguins)
 library(ggthemes)
+library(glue)
 ```
 
 ## `penguins` data
@@ -33,7 +35,7 @@ The `penguins` data has 344 penguins observations with 8 columns.
 
 ```{r}
 #| echo: true
-penguins
+print(penguins, width = Inf)
 
 ```
 
@@ -157,7 +159,8 @@ The warning indicates that two of the penguins have missing body mass and/or fli
 penguins |> 
   dplyr::filter(
     is.na(flipper_length_mm) | is.na(body_mass_g)
-  )
+  ) |>
+  print(width = Inf)
 ```
 
 ## Creating a `ggplot`
@@ -852,4 +855,1264 @@ ggplot2::ggsave(
   plot = penguin_plot,
   width = 5, 
   height = 4)
+```
+
+## Exercise 2.2.5
+
+How many rows are in `penguins`? How many columns?
+
+```{r}
+#| echo: true
+
+glue::glue("
+  There are {nrow(penguins)} rows and {ncol(penguins)} columns in the penguin data set
+  "
+)
+```
+
+## Exercise 2.2.5
+
+What does the `bill_depth_mm` variable in the `penguins` data frame describe? Read the help for ?penguins to find out.
+
+```{r}
+#| echo: true
+#| eval: false
+
+?penguins
+
+```
+
+```{=html}
+<iframe width="1000" height="400" src="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html" title="Penguin Documentation" ></iframe>
+```
+
+## Exercise 2.2.5
+
+Make a scatterplot of `bill_depth_mm` vs. `bill_length_mm`. Describe the relationship between these two variables.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins, 
+  mapping = ggplot2::aes(
+    x = .data[["bill_depth_mm"]], 
+    y = .data[["bill_length_mm"]])
+) + 
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Bill depth vs Bill Length",
+    subtitle = "Small positive correaltion between bill depth and length.",
+    x = "Bill Length (mm)", 
+    y = "Bill Depth\n(mm)"
+  ) 
+```
+
+## Exercise 2.2.5
+
+What happens if you make a scatterplot of `species` vs. `bill_depth_mm` ?
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins, 
+  mapping = ggplot2::aes(
+    x = .data[["bill_length_mm"]], 
+    y = .data[["species"]])
+) + 
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Species vs Bill Length",
+    subtitle = "We get a dot plot but it is hard to see the distribution.",
+    x = "Bill Depth (mm)", 
+    y = "Species"
+  ) 
+```
+
+## Exercise 2.2.5
+
+What might be a better choice of geom ?
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins, 
+  mapping = ggplot2::aes(
+    x = .data[["bill_length_mm"]], 
+    y = .data[["species"]])
+) + 
+  ggplot2::geom_boxplot() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Species vs Bill Length",
+    subtitle = "A box plot may be better.",
+    x = "Bill Depth (mm)", 
+    y = "Species"
+  ) 
+```
+
+## Exercise 2.2.5
+
+Why does the following give an error and how would you fix it?
+
+```{r}
+#| echo: true
+#| error: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(data = penguins) + 
+  ggplot2::geom_point()
+```
+
+## Exercise 2.2.5
+
+We need to set mapping parameters using the `aes` function to tell `ggplot` which columns in `penguins` are used for the x or y axis respectively.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot(data = penguins) + 
+  geom_point(
+    mapping = ggplot2::aes(
+    x = .data[["bill_depth_mm"]], 
+    y = .data[["bill_length_mm"]]  
+  )
+)
+```
+
+## Exercise 2.2.5
+
+What does the `na.rm` argument do in `geom_point()`? What is the default value of the argument? Create a scatterplot where you successfully use this argument set to TRUE.
+
+```{r}
+#| echo: true
+#| eval: false
+
+?ggplot2::geom_point()
+
+```
+
+```{=html}
+<iframe width="1000" height="400" src="https://ggplot2.tidyverse.org/reference/geom_point.html" title="geom_point Documentation" ></iframe>
+```
+
+## Exercise 2.2.5
+
+Warning message is removed.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins, 
+  mapping = ggplot2::aes(
+    x = .data[["bill_depth_mm"]], 
+    y = .data[["bill_length_mm"]])
+) + 
+  ggplot2::geom_point(
+    na.rm = TRUE,
+) +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Bill depth vs Bill Length",
+    subtitle = "Small positive correaltion between bill depth and length.",
+    x = "Bill Length (mm)", 
+    y = "Bill Depth\n(mm)"
+  ) 
+
+```
+
+## Exercise 2.2.5
+
+Add the following caption to the plot you made in the previous exercise: “Data come from the `palmerpenguins` package.” Hint: Take a look at the documentation for `labs()`.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins, 
+  mapping = ggplot2::aes(
+    x = .data[["bill_depth_mm"]], 
+    y = .data[["bill_length_mm"]])
+) + 
+  ggplot2::geom_point(
+    na.rm = TRUE,
+) +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Bill depth vs Bill Length",
+    subtitle = "Small positive correaltion between bill depth and length.",
+    caption = "Data come from the palmerpenguins package.",
+    x = "Bill Length (mm)", 
+    y = "Bill Depth\n(mm)"
+  ) 
+
+```
+
+## Exercise 2.2.5
+
+Add the following caption to the plot you made in the previous exercise: “Data come from the `palmerpenguins` package.” Hint: Take a look at the documentation for `labs()`.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins, 
+  mapping = ggplot2::aes(
+    x = .data[["bill_depth_mm"]], 
+    y = .data[["bill_length_mm"]])
+) + 
+  ggplot2::geom_point(
+    na.rm = TRUE,
+) +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Bill depth vs Bill Length",
+    subtitle = "Small positive correaltion between bill depth and length.",
+    caption = "Data come from the palmerpenguins package.",
+    x = "Bill Length (mm)", 
+    y = "Bill Depth\n(mm)"
+  ) 
+
+```
+
+## Exercise 2.2.5
+
+Image replication
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins, 
+  mapping = ggplot2::aes(
+    x = .data[["flipper_length_mm"]], 
+    y = .data[["body_mass_g"]])
+  ) + 
+  ggplot2::geom_point(
+    mapping = ggplot2::aes(
+      color = .data[["bill_depth_mm"]]
+    )
+  ) +
+  ggplot2::geom_smooth()
+
+```
+
+## Exercise 2.2.5
+
+What does `se = FALSE` in `geom_smooth` do ? It plots the smooth line without confidence interval.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["flipper_length_mm"]], 
+    y = .data[["body_mass_g"]], 
+    color = .data[["island"]])
+) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth(se = FALSE)
+
+```
+
+## Exercise 2.2.5
+
+What is the output difference between these two codes ? There is no difference.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["flipper_length_mm"]], 
+    y = .data[["body_mass_g"]])
+) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth()
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+
+ggplot2::ggplot() + 
+ggplot2::geom_point(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = .data[["flipper_length_mm"]], 
+      y = .data[["body_mass_g"]])
+) +
+ggplot2::geom_smooth(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = .data[["flipper_length_mm"]], 
+      y = .data[["body_mass_g"]])
+  )
+```
+
+:::
+
+::::
+
+## Exercise 2.4.3
+
+Make a bar plot of species of penguins, where you assign species to the y aesthetic (instead of x). How is this plot different?
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["species"]])
+) +
+  ggplot2::geom_bar()
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    y = .data[["species"]])
+) +
+  ggplot2::geom_bar()
+```
+
+:::
+
+::::
+
+## Exercise 2.4.3
+
+Which aesthetic, color or fill, is more useful for changing the color of bars?
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["species"]])
+) +
+  ggplot2::geom_bar(
+    color = "green"
+  )
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["species"]])
+) +
+  ggplot2::geom_bar(
+    fill = "green"
+  )
+```
+
+:::
+
+::::
+
+## Exercise 2.4.3
+
+What does the bins argument in `geom_histogram` do?
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["body_mass_g"]])
+) + 
+ggplot2::geom_histogram(
+  color = "green",
+  bins = 5)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["body_mass_g"]])
+) + 
+ggplot2::geom_histogram(
+  color = "green",
+  bins = 10)
+```
+
+:::
+
+::::
+
+## Exercise 2.4.3
+
+Make a histogram of the `carat` variable in the `diamonds` dataset that is available when you load the tidyverse package. Experiment with different binwidths. What binwidth reveals the most interesting patterns?
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+
+ggplot2::ggplot(
+  data = diamonds,
+  mapping = ggplot2::aes(
+    x = .data[["carat"]])
+) + 
+ggplot2::geom_histogram(
+  color = "green",
+  binwidth = 1)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+
+ggplot2::ggplot(
+  data = diamonds,
+  mapping = ggplot2::aes(
+    x = .data[["carat"]])
+) + 
+ggplot2::geom_histogram(
+  color = "green",
+  binwidth = 0.01)
+```
+
+:::
+
+::::
+
+## Exercise 2.5.5
+
+Which variables in mpg are categorical? Which variables are numerical? How can you see this information when you run mpg? Unfortunately `?mpg` is not so clear.
+
+```{r}
+#| echo: true
+#| eval: false
+
+?mpg
+
+```
+
+```{=html}
+<iframe width="1000" height="400" src="https://ggplot2.tidyverse.org/reference/mpg.html" title="mpg Documentation" ></iframe>
+```
+
+## Exercise 2.5.5
+
+We can use `dplyr::glimpse` to identify which variables are categorical and numeric.
+
+```{r}
+#| echo: true
+
+dplyr::glimpse(mpg)
+
+```
+
+## Exercise 2.5.5
+
+Make a scatterplot of `hwy` vs. `displ` using the mpg data frame
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["displ"]], 
+    y = .data[["hwy"]])
+) +
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    x = "Engine displacement in litres", 
+    y = "Highway miles\nper gallon"
+  ) 
+
+```
+
+## Exercise 2.5.5
+
+Next, map a third, numerical/categorical variable to color, then size, then both color and size, then shape
+
+::: {.panel-tabset}
+
+### Color (cty)
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["displ"]], 
+    y = .data[["hwy"]],
+    color = .data[["cty"]])
+) +
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    x = "Engine displacement in litres", 
+    y = "Highway miles\nper gallon",
+    colour = "City miles\nper gallon"
+  ) 
+
+```
+
+### Color (class)
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["displ"]], 
+    y = .data[["hwy"]],
+    color = .data[["class"]])
+) +
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    x = "Engine displacement in litres", 
+    y = "Highway miles\nper gallon",
+    color = "Type of Car"
+  ) 
+
+```
+
+### Size (cty)
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["displ"]], 
+    y = .data[["hwy"]],
+    size = .data[["cty"]])
+) +
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    x = "Engine displacement in litres", 
+    y = "Highway miles\nper gallon",
+    colour = "City miles\nper gallon"
+  ) 
+
+```
+
+### Size (class)
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["displ"]], 
+    y = .data[["hwy"]],
+    size = .data[["class"]])
+) +
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    x = "Engine displacement in litres", 
+    y = "Highway miles\nper gallon",
+    color = "Type of Car"
+  ) 
+
+```
+
+:::
+
+## Exercise 2.5.5
+
+Next, map a third, numerical/categorical variable to color, then size, then both color and size, then shape
+
+::: {.panel-tabset}
+
+### Color and Size (cty)
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["displ"]], 
+    y = .data[["hwy"]],
+    color = .data[["cty"]],
+    size = .data[["cty"]])
+) +
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    x = "Engine displacement in litres", 
+    y = "Highway miles\nper gallon",
+    colour = "City miles\nper gallon"
+  ) 
+
+```
+
+### Color and Size (class)
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["displ"]], 
+    y = .data[["hwy"]],
+    size = .data[["class"]],
+    size = .data[["cty"]])
+) +
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    x = "Engine displacement in litres", 
+    y = "Highway miles\nper gallon",
+    color = "Type of Car"
+  ) 
+
+```
+
+:::
+
+## Exercise 2.5.5
+
+Next, map a third, numerical/categorical variable to color, then size, then both color and size, then shape
+
+::: {.panel-tabset}
+
+### Shape (cty)
+
+```{r}
+#| echo: true
+#| error: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["displ"]], 
+    y = .data[["hwy"]],
+    shape = .data[["cty"]])
+) +
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    x = "Engine displacement in litres", 
+    y = "Highway miles\nper gallon",
+    colour = "City miles\nper gallon"
+  ) 
+
+```
+
+### Shape (class)
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["displ"]], 
+    y = .data[["hwy"]],
+    shape = .data[["class"]])
+) +
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    x = "Engine displacement in litres", 
+    y = "Highway miles\nper gallon",
+    color = "Type of Car"
+  ) 
+
+```
+
+### Shape (class) Fixed
+
+See [stackoverflow](https://stackoverflow.com/questions/16813278/cycling-through-point-shapes-when-more-than-6-factor-levels)
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["displ"]], 
+    y = .data[["hwy"]],
+    shape = .data[["class"]])
+) +
+  ggplot2::geom_point() +
+ggplot2::scale_shape_manual(values= c(0:7)) +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    x = "Engine displacement in litres", 
+    y = "Highway miles\nper gallon",
+    color = "Type of Car"
+  ) 
+
+```
+
+:::
+
+## Exercise 2.5.5
+
+In the scatterplot of `hwy` vs. `displ`, what happens if you map a third variable to `linewidth`?
+
+::: {.panel-tabset}
+
+### Lucky case
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["displ"]], 
+    y = .data[["hwy"]],
+    linewidth = .data[["year"]])
+) +
+  ggplot2::geom_point()
+
+```
+
+### Unlucky case
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["displ"]], 
+    y = .data[["hwy"]],
+    linewidth = .data[["year"]])
+) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth()
+
+```
+
+### Oh No case
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["displ"]], 
+    y = .data[["hwy"]],
+    linewidth = .data[["class"]])
+) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth()
+
+```
+
+:::
+
+## Exercise 2.5.5
+
+What happens if you map the same variable to multiple aesthetics?
+
+::: {.panel-tabset}
+
+### Lucky case
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["class"]], 
+    colour = .data[["class"]],
+    fill = .data[["class"]])
+  
+) +
+  ggplot2::geom_bar() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    x = "Type of Car", 
+    y = "Count",
+    color = "Type of Car",
+    fill = "Type of Car"
+  ) 
+
+```
+
+### Unlucky case
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+    x = .data[["cty"]], 
+    y = .data[["cty"]],
+    colour = .data[["cty"]])
+  
+) +
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    x = "City miles per gallon", 
+    y = "City miles\nper gallon",
+    color = "City miles\nper gallon",
+  ) 
+
+```
+
+:::
+
+## Exercise 2.5.5
+
+Make a scatterplot of `bill_depth_mm` vs. `bill_length_mm` and color the points by `species`. What does adding coloring by species reveal about the relationship between these two variables? What about faceting by species?
+
+::: {.panel-tabset}
+
+### No facet
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["bill_length_mm"]], 
+    y = .data[["bill_depth_mm"]],
+    colour = .data[["species"]])
+  
+) +
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Bill Depth(mm) vs Bill Length (mm)",
+    subtitle = glue::glue("
+        \U2022 Adelie has longer bill depth but shorter bill length than Gentoo.
+        \U2022 Chinstrap has longer bill depth and length than Adelie and Gentoo.
+    "),
+    x = "Bill Length (mm)", 
+    y = "Bill Depth\n(mm)",
+    color = "Species",
+  ) 
+
+```
+
+### With facet
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["bill_length_mm"]], 
+    y = .data[["bill_depth_mm"]],
+    colour = .data[["species"]])
+  
+) +
+  ggplot2::geom_point() +
+  ggplot2::facet_wrap(
+    facets = ggplot2::vars(.data[["species"]])
+) +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Bill Depth(mm) vs Bill Length (mm)",
+    subtitle = glue::glue("
+        \U2022 Adelie has longer bill depth but shorter bill length than Gentoo.
+        \U2022 Chinstrap has longer bill depth and length than Adelie and Gentoo.
+    "),
+    x = "Bill Length (mm)", 
+    y = "Bill Depth\n(mm)",
+    color = "Species",
+  ) 
+
+```
+
+:::
+
+## Exercise 2.5.5
+
+Why does the following yield two separate legends? How would you fix it to combine the two legends?
+
+::: {.panel-tabset}
+
+### Two Legend
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["bill_length_mm"]], 
+    y = .data[["bill_depth_mm"]],
+    colour = .data[["species"]],
+    shape = .data[["species"]])
+  
+) +
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Bill Depth(mm) vs Bill Length (mm)",
+    subtitle = glue::glue("
+        \U2022 Adelie has longer bill depth but shorter bill length than Gentoo.
+        \U2022 Chinstrap has longer bill depth and length than Adelie and Gentoo.
+    "),
+    x = "Bill Length (mm)", 
+    y = "Bill Depth\n(mm)",
+    color = "Species",
+  ) 
+
+```
+
+### Two Legend Fixed
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["bill_length_mm"]], 
+    y = .data[["bill_depth_mm"]],
+    colour = .data[["species"]],
+    shape = .data[["species"]])
+  
+) +
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Bill Depth(mm) vs Bill Length (mm)",
+    subtitle = glue::glue("
+        \U2022 Adelie has longer bill depth but shorter bill length than Gentoo.
+        \U2022 Chinstrap has longer bill depth and length than Adelie and Gentoo.
+    "),
+    x = "Bill Length (mm)", 
+    y = "Bill Depth\n(mm)",
+    color = "Species",
+    shape = "Species"
+  ) 
+
+```
+
+:::
+
+## Exercise 2.5.5
+
+Create the two following stacked bar plots. Which question can you answer with the first one? Which question can you answer with the second one?
+
+::: {.panel-tabset}
+
+### First 
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["island"]],
+    fill = .data[["species"]])
+) +
+  ggplot2::geom_bar(
+    position = "fill"
+  ) +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Proportion of Species In A Given Island",
+    subtitle = glue::glue("
+        \U2022 Torgersen only has Adelie.
+        \U2022 Dream has similar proportions of Adelie and Chinstrap living there.
+        \U2022 Biscoe has 1/4 Adelie and 3/4 Gentoo living there.
+    "),
+    x = "Island", 
+    y = "Proportion",
+    fill = "Species"
+  ) 
+```
+### Second
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["species"]],
+    fill = .data[["island"]])
+) +
+  ggplot2::geom_bar(
+    position = "fill"
+  ) +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Island habitat distribution for each species",
+    subtitle = glue::glue("
+        \U2022 Adelie lives in all three islands at similar proportions.
+        \U2022 Chinstrap only lives in Dream.
+        \U2022 Gentoo only lives in Biscoe.
+    "),
+    x = "Species", 
+    y = "Proportion",
+    fill = "Island"
+  ) 
+```
+
+:::
+
+
+## Exercise 2.6.1
+
+Run the following lines of code. Which of the two plots is saved as mpg-plot.png? Why?
+
+```{r}
+#| echo: true
+#| eval: false
+
+penguin_plot <- ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+     x = .data[["class"]]
+    )
+) + 
+ggplot2::geom_bar()
+
+penguin_plot <- ggplot2::ggplot(
+  data = mpg,
+  mapping = ggplot2::aes(
+     x = .data[["cty"]],
+     y = .data[["hwy"]]
+    )
+) + 
+ggplot2::geom_point()
+
+ggplot2::ggsave(
+  filename = "mpg-plot.png"
+)
+```
+
+## Exercise 2.6.1
+
+It is the second plot because by default value of the `plot` argument, `ggsave` saves the last plot displayed.
+
+```{r}
+#| echo: true
+#| eval: false
+
+?ggplot2::ggsave
+
+```
+
+```{=html}
+<iframe width="1000" height="400" src="https://ggplot2.tidyverse.org/reference/ggsave.html" title="ggsave Documentation" ></iframe>
+```
+
+## Exercise 2.6.1
+
+What do you need to change in the code above to save the plot as a PDF instead of a PNG?
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot2::ggsave(
+  filename = "mpg-plot.pdf"
+)
+
+ggplot2::ggsave(
+  filename = "no_file_extension",
+  device = "pdf"
+)
+
+```
+
+```{=html}
+<iframe width="1000" height="400" src="https://ggplot2.tidyverse.org/reference/ggsave.html" title="ggsave Documentation" ></iframe>
+```
+
+## Exercise 2.6.1
+
+How could you find out what types of image files would work in `ggsave()`? Use the `device` argument.
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot2::ggsave(
+  filename = "no_file_extension",
+  device = "pdf"
+)
+
+```
+
+```{=html}
+<iframe width="1000" height="400" src="https://ggplot2.tidyverse.org/reference/ggsave.html" title="ggsave Documentation" ></iframe>
 ```
