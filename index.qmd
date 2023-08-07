@@ -1,0 +1,855 @@
+---
+title: |
+  R4DS Chapter 2 <br>
+  Data Visualisation
+author: Jeremy Selva <br> [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS) [`r fontawesome::fa(name = "linkedin")`](https://www.linkedin.com/in/jeremy-selva-085b9112a/) [`r fontawesome::fa(name = "link")`](https://jeremy-selva.netlify.app/) [`r fontawesome::fa(name = "twitter")`](https://twitter.com/JauntyJJS)
+format:
+  revealjs:
+    theme: [moon, custom.scss]
+    slide-number: true
+    scrollable: true
+    preview-links: auto
+---
+
+```{r setup, include=FALSE}
+library(fontawesome)
+```
+
+## Introduction
+
+This chapter shows how to visualise data using `ggplot2`. Ensure these libraries are available.
+
+```{r}
+#| echo: true
+
+library(tidyverse)
+library(palmerpenguins)
+library(ggthemes)
+```
+
+## `penguins` data
+
+The `penguins` data has 344 penguins observations with 8 columns.
+
+```{r}
+#| echo: true
+penguins
+
+```
+
+## `penguins` data
+
+Among the variables in penguins are:
+
+1. `species`: a penguin’s species (Adelie, Chinstrap, or Gentoo).
+
+2. `flipper_length_mm`: length of a penguin’s flipper, in millimeters.
+
+3. `body_mass_g`: body mass of a penguin, in grams.
+
+## `penguins` data
+
+We can take a closer look using  `dplyr::glimpse()`
+
+```{r}
+#| echo: true
+dplyr::glimpse(penguins)
+```
+
+We try to find a relationship between flipper lengths and body masses for each penguins species.
+
+## Creating a `ggplot`
+
+The first argument `data` is to tell `ggplot` which the dataset to use in the graph. It gives an empty graph at first.
+
+```{r}
+#| echo: true
+#| output-location: column
+
+
+ggplot2::ggplot(data = penguins)
+```
+
+## Creating a `ggplot`
+
+The next argument `mapping` tells `ggplot` what variables in `penguins` holds the x and y axis. The `mapping` argument must be an output of the `ggplot2::aes` function.
+
+```{r}
+#| echo: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g
+      )
+)
+```
+
+## Creating a `ggplot`
+
+We can see that flipper lengths and body mass are displayed in the x and y axis. However, we cannot see the penguin data in the plot.
+
+```{r}
+#| echo: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g
+      )
+)
+```
+
+## Creating a `ggplot`
+
+We need to specify using `geom_` what the data should be represented as a 
+
+* bar `geom_bar()`
+* line `geom_line()`
+* boxplot `geom_boxplot()`
+* scatterplots `geom_point()`
+
+## Creating a `ggplot`
+
+Here is a `geom_point` example.
+
+```{r}
+#| echo: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g
+      )
+)
+```
+
+## Creating a `ggplot`
+
+Adding `geom_point()` gives us the points. We can see that penguins with longer flippers are generally larger in their body mass.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g
+      )
+) + 
+ggplot2::geom_point()
+```
+
+## Creating a `ggplot`
+
+The warning indicates that two of the penguins have missing body mass and/or flipper length values.
+
+```{r}
+penguins |> 
+  dplyr::filter(
+    is.na(flipper_length_mm) | is.na(body_mass_g)
+  )
+```
+
+## Creating a `ggplot`
+
+In general, we can see that penguins with longer flippers are generally larger in their body mass. 
+
+Does this applies for all species (Adelie, Chinstrap and Gentoo) ? 
+
+We can do this by representing species with different colored points.
+
+## Creating a `ggplot`
+
+To do this, we modify the `aes` function by adding `color = species`.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g,
+      color = species
+      )
+) + 
+ggplot2::geom_point()
+```
+
+## Creating a `ggplot`
+
+This allows `ggplot` to assign a unique colour for each species and provides a legend.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g,
+      color = species
+      )
+) + 
+ggplot2::geom_point()
+```
+
+## Creating a `ggplot`
+
+We now wish to add a smooth curve for each species. this is done by adding `geom_smooth(method = "lm")`
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g,
+      color = species
+      )
+) + 
+ggplot2::geom_point() +
+ggplot2::geom_smooth(method = "lm")
+```
+
+## Creating a `ggplot`
+
+Instead of a line for all species, how do we add only one smooth curve to describe the relationship for all species ?
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g,
+      color = species
+      )
+) + 
+ggplot2::geom_point() +
+ggplot2::geom_smooth(method = "lm")
+```
+
+## Creating a `ggplot`
+
+We need to agree that the following are equivalent.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g,
+      color = species
+      )
+) + 
+ggplot2::geom_point() +
+ggplot2::geom_smooth(method = "lm")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot2::ggplot() + 
+ggplot2::geom_point(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g,
+      color = species)
+) +
+ggplot2::geom_smooth(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g,
+      color = species),
+  method = "lm")
+```
+
+:::
+
+::::
+
+## Creating a `ggplot`
+
+Because we want to draw a smooth curve along all species, we need to remove the `color = species` in the `mapping` argument of `geom_smooth`.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot() + 
+ggplot2::geom_point(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g,
+      color = species)
+) +
+ggplot2::geom_smooth(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g),
+  method = "lm")
+```
+
+## Creating a `ggplot`
+
+We put what mapping arguments that are common in `geom_point` and `geom_smooth` back to `ggplot`.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot2::ggplot() + 
+ggplot2::geom_point(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g,
+      color = species)
+) +
+ggplot2::geom_smooth(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = flipper_length_mm, 
+      y = body_mass_g),
+  method = "lm")
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = flipper_length_mm, 
+     y = body_mass_g
+    )
+) + 
+ggplot2::geom_point(
+  mapping = ggplot2::aes(
+      color = species)
+) +
+ggplot2::geom_smooth(
+  method = "lm")
+```
+
+:::
+
+::::
+
+## Creating a `ggplot`
+
+Here is the simplified code.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+#| 
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = flipper_length_mm, 
+     y = body_mass_g
+    )
+) + 
+ggplot2::geom_point(
+  mapping = ggplot2::aes(
+      color = species)
+) +
+ggplot2::geom_smooth(
+  method = "lm")
+```
+
+## Creating a `ggplot`
+
+Besides colour, we can create a different shape for each species.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = flipper_length_mm, 
+     y = body_mass_g
+    )
+) + 
+ggplot2::geom_point(
+  mapping = ggplot2::aes(
+      color = species,
+      shape = species)
+) +
+ggplot2::geom_smooth(
+  method = "lm")
+```
+
+## Creating a `ggplot`
+
+Next, we use `labs` to label the plot.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = flipper_length_mm, 
+     y = body_mass_g
+    )
+) + 
+ggplot2::geom_point(
+  mapping = ggplot2::aes(
+      color = species,
+      shape = species)
+) +
+ggplot2::geom_smooth(
+  method = "lm") +
+ggplot2::labs(
+    title = "Body mass and flipper length",
+    subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
+    x = "Flipper length (mm)", 
+    y = "Body mass (g)",
+    color = "Species", 
+    shape = "Species"
+  ) 
+```
+
+## Creating a `ggplot`
+
+Lastly, we add `scale_color_colorblind` to improve the colour palette to be colour-blind safe.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = flipper_length_mm, 
+     y = body_mass_g
+    )
+) + 
+ggplot2::geom_point(
+  mapping = ggplot2::aes(
+      color = species,
+      shape = species)
+) +
+ggplot2::geom_smooth(
+  method = "lm") +
+ggplot2::labs(
+    title = "Body mass and flipper length",
+    subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
+    x = "Flipper length (mm)", 
+    y = "Body mass (g)",
+    color = "Species", 
+    shape = "Species"
+  ) +
+ggthemes::scale_color_colorblind()
+```
+
+## `ggplot2` calls
+
+There is a concise way of using ggplot2 code to that saves typing. In general, we want to reduce the amount of extra text to make it easier to compare simialr codes.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| eval: false
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = flipper_length_mm, 
+    y = body_mass_g)) +
+  ggplot2::geom_point()
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| eval: false
+
+penguins |> 
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = flipper_length_mm,
+      y = body_mass_g)) + 
+  ggplot2::geom_point()
+```
+
+:::
+
+::::
+
+## Visualising Distributions
+
+For categorical variables, we can view the distribution using bar charts.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = species
+    )
+) + 
+ggplot2::geom_bar()
+
+```
+
+## Visualising Distributions
+
+To arrange them based on frequencies, we can use `fct_infreq` to convert the categorical variable to a factor and reorder the level of the factor based on the frequencies.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = forcats::fct_infreq(species)
+    )
+) + 
+ggplot2::geom_bar()
+
+```
+
+## Visualising Distributions
+
+For numerical variables, we can view the distribution using histograms.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = body_mass_g
+    )
+) + 
+ggplot2::geom_histogram(
+  binwidth = 200)
+
+```
+
+## Visualising Distributions
+
+We may need to adjust the `binwidth` argument if necessary.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = body_mass_g
+    )
+) + 
+ggplot2::geom_histogram(
+  binwidth = 20)
+
+```
+
+## Visualising Distributions
+
+We may need to adjust the `binwidth` argument if necessary.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = body_mass_g
+    )
+) + 
+ggplot2::geom_histogram(
+  binwidth = 2000)
+
+```
+
+## Visualising Distributions
+
+Alternatively, we can view the distribution using density plot.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = body_mass_g
+    )
+) + 
+ggplot2::geom_density()
+
+```
+
+## Visualising Relationships
+
+We can use a side-by-side boxplot to view the relationship between a numerical and a categorical variable.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = species, 
+     y = body_mass_g
+    )
+) + 
+ggplot2::geom_boxplot()
+
+```
+
+## Visualising Relationships
+
+Alternatively, we can view the distribution using density plot. We use `linewidth = 0.75` to make the lines stand out a bit more against the background.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = body_mass_g, 
+     color = species
+    )
+) + 
+ggplot2::geom_density(
+  linewidth = 0.75
+)
+```
+
+## Visualising Relationships
+
+Additionally, we can set `fill = species` and use `alpha` to add transparency to the filled density curve.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = body_mass_g, 
+     color = species,
+     fill = species
+    )
+) + 
+ggplot2::geom_density(
+  linewidth = 0.75,
+  alpha = 0.5
+)
+```
+
+## Visualising Relationships
+
+Stacked bar plots are useful to visualize the relationship between two categorical variables.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = island, 
+     fill = species
+    )
+) + 
+ggplot2::geom_bar()
+```
+
+## Visualising Relationships
+
+By setting `position = "fill"`, we create a relative frequency plot.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = island, 
+     fill = species
+    )
+) + 
+ggplot2::geom_bar(
+  position = "fill"
+)
+```
+
+## Visualising Relationships
+
+Scatterplots are useful to visualize the relationship between two numerical variables.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = flipper_length_mm, 
+     y = body_mass_g
+    )
+) + 
+ggplot2::geom_point()
+```
+
+## Visualising Relationships
+
+To visualize the relationship between three or more variables. Things get a bit tricky. For example, we can let colors of points represent species and the shapes of points represent islands but it is hard to see anything meaningful.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = flipper_length_mm, 
+     y = body_mass_g
+    )
+) + 
+ggplot2::geom_point(
+  mapping = ggplot2::aes(
+     color = species, 
+     shape = island
+    )
+)
+```
+
+## Visualising Relationships
+
+To counter this issue we can split plots into different facets, subplots that each display one subset of the data, using `facet_wrap`
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = flipper_length_mm, 
+     y = body_mass_g
+    )
+) + 
+ggplot2::geom_point(
+  mapping = ggplot2::aes(
+     color = species, 
+     shape = species
+    )
+) +
+ggplot2::facet_wrap(
+  ggplot2::vars(island)
+)
+```
+
+## Save Plots
+
+Use `ggsave` to save a `ggplot` plot 
+
+```{r}
+#| echo: true
+#| eval: false
+
+penguin_plot <- ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = flipper_length_mm, 
+     y = body_mass_g
+    )
+) + 
+ggplot2::geom_point()
+
+ggplot2::ggsave(
+  filename = "penguin-plot.png",
+  plot = penguin_plot,
+  width = 5, 
+  height = 4)
+```

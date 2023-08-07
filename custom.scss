@@ -1,0 +1,27 @@
+/*-- scss:defaults --*/
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat:600,600i&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans:300&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Fira+Mono&display=swap);
+
+// headings
+$presentation-heading-font: 'Josefin Sans', sans-serif !default;
+$presentation-font-size-root: 2rem !default;
+
+$presentation-h1-font-size: 5.75rem !default;
+$presentation-h2-font-size: 2.75rem !default;
+$presentation-h3-font-size: 2.1rem !default;
+
+
+//code
+$font-family-monospace: 'Fira Mono', monospace  !default;
+
+/*-- scss:rules --*/
+
+// https://stackoverflow.com/questions/75471614/how-to-make-code-chunk-output-scrollable-horizontally-in-quarto-revealjs-present
+
+// To make code chunk scroll horizontally
+.hscroll {
+  overflow-x: auto;
+  white-space: nowrap;
+}
