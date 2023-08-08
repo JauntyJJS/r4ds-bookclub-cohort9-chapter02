@@ -9,6 +9,7 @@ format:
     controls: true
     slide-number: true
     scrollable: true
+    mouse-wheel: true
     preview-links: auto
 ---
 
@@ -35,6 +36,13 @@ library(ggfittext)
 library(ggtext)
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## `penguins` data
 
 The `penguins` data has 344 penguins observations with 8 columns.
@@ -45,6 +53,13 @@ print(penguins, width = Inf)
 
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## `penguins` data
 
 Among the variables in penguins are:
@@ -54,6 +69,13 @@ Among the variables in penguins are:
 2. `flipper_length_mm`: length of a penguin’s flipper, in millimeters.
 
 3. `body_mass_g`: body mass of a penguin, in grams.
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
 
 ## `penguins` data
 
@@ -66,6 +88,13 @@ dplyr::glimpse(penguins)
 
 We try to find a relationship between flipper lengths and body masses for each penguins species.
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Creating a `ggplot`
 
 The first argument `data` is to tell `ggplot` which the dataset to use in the graph. It gives an empty graph at first.
@@ -77,6 +106,13 @@ The first argument `data` is to tell `ggplot` which the dataset to use in the gr
 
 ggplot2::ggplot(data = penguins)
 ```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
 
 ## Creating a `ggplot`
 
@@ -116,10 +152,10 @@ ggplot2::ggplot(
 
 We need to specify using `geom_` what the data should be represented as a 
 
-* bar `geom_bar()`
-* line `geom_line()`
-* boxplot `geom_boxplot()`
-* scatterplots `geom_point()`
+* bar using `geom_bar()`
+* line using `geom_line()`
+* boxplot using `geom_boxplot()`
+* scatterplots using `geom_point()`
 
 ## Creating a `ggplot`
 

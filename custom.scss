@@ -25,3 +25,7 @@ $font-family-monospace: 'Fira Mono', monospace  !default;
   overflow-x: auto;
   white-space: nowrap;
 }
+
+.reveal .footer > * {
+  font-size: 0.8rem;
+}
