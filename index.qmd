@@ -542,7 +542,9 @@ Here is the simplified code.
 #| echo: true
 #| warning: true
 #| output-location: column
-#| 
+#| fig-height: 7
+#| fig-alt: "A scatterplot of penguin's body mass in mm vs flipper length in g with a smooth curve."
+
 ggplot2::ggplot(
   data = penguins,
   mapping = ggplot2::aes(
@@ -558,6 +560,13 @@ ggplot2::geom_smooth(
   method = "lm")
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Creating a `ggplot`
 
 Besides colour, we can create a different shape for each species.
@@ -566,6 +575,9 @@ Besides colour, we can create a different shape for each species.
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|11"
+#| fig-height: 7
+#| fig-alt: "A scatterplot of penguin's body mass in mm vs flipper length in g with a smooth curve. Different species are indicated with different colour and shape."
 
 ggplot2::ggplot(
   data = penguins,
@@ -583,6 +595,13 @@ ggplot2::geom_smooth(
   method = "lm")
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Creating a `ggplot`
 
 Next, we use `labs` to label the plot.
@@ -591,6 +610,10 @@ Next, we use `labs` to label the plot.
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|15-22"
+#| fig-height: 7
+#| fig-alt: "A scatterplot of penguin's body mass in mm vs flipper length in g with a smooth curve. A title and subtitle has been added."
+
 
 ggplot2::ggplot(
   data = penguins,
@@ -616,6 +639,13 @@ ggplot2::labs(
   ) 
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Creating a `ggplot`
 
 Lastly, we add `scale_color_colorblind` to improve the colour palette to be colour-blind safe.
@@ -624,6 +654,9 @@ Lastly, we add `scale_color_colorblind` to improve the colour palette to be colo
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|23"
+#| fig-height: 7
+#| fig-alt: "A scatterplot of penguin's body mass in mm vs flipper length in g with a smooth curve. A colour blind friendly palette is used."
 
 ggplot2::ggplot(
   data = penguins,
@@ -649,6 +682,13 @@ ggplot2::labs(
   ) +
 ggthemes::scale_color_colorblind()
 ```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
 
 ## Creating a `ggplot`
 
@@ -659,6 +699,7 @@ More info in [Anna Monus's Blog](https://webdesign.tutsplus.com/designing-for-co
 ```{r}
 #| echo: false
 #| warning: false
+#| fig-alt: "A scatterplot of penguin's body mass in mm vs flipper length in g with a smooth curve. A colour blind friendly palette is used."
 
 ggplot2::ggplot(
   data = penguins,
@@ -685,347 +726,12 @@ ggplot2::labs(
 ggthemes::scale_color_colorblind()
 ```
 
-## Exercise 2.2.5
+::: footer
 
-How many rows are in `penguins`? How many columns?
-
-```{r}
-#| echo: true
-
-glue::glue("
-  There are {nrow(penguins)} rows and {ncol(penguins)} columns in the penguin data set
-  "
-)
-```
-
-## Exercise 2.2.5
-
-What does the `bill_depth_mm` variable in the `penguins` data frame describe? Read the help for ?penguins to find out.
-
-```{r}
-#| echo: true
-#| eval: false
-
-?penguins
-
-```
-
-```{=html}
-<iframe width="1000" height="400" src="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html" title="Penguin Documentation" ></iframe>
-```
-
-## Exercise 2.2.5
-
-Make a scatterplot of `bill_depth_mm` vs. `bill_length_mm`. Describe the relationship between these two variables.
-
-```{r}
-#| echo: true
-#| warning: true
-#| output-location: column
-
-ggplot2::ggplot(
-  data = penguins, 
-  mapping = ggplot2::aes(
-    x = .data[["bill_depth_mm"]], 
-    y = .data[["bill_length_mm"]])
-) + 
-  ggplot2::geom_point() +
-ggplot2::theme(
-  axis.title.y = ggplot2::element_text(angle = 0)
-) +
-ggplot2::labs(
-    title = "Bill depth vs Bill Length",
-    subtitle = "Small positive correaltion between bill depth and length.",
-    x = "Bill Length (mm)", 
-    y = "Bill Depth\n(mm)"
-  ) 
-```
-
-## Exercise 2.2.5
-
-What happens if you make a scatterplot of `species` vs. `bill_depth_mm` ?
-
-```{r}
-#| echo: true
-#| warning: true
-#| output-location: column
-
-ggplot2::ggplot(
-  data = penguins, 
-  mapping = ggplot2::aes(
-    x = .data[["bill_length_mm"]], 
-    y = .data[["species"]])
-) + 
-  ggplot2::geom_point() +
-ggplot2::theme(
-  axis.title.y = ggplot2::element_text(angle = 0)
-) +
-ggplot2::labs(
-    title = "Species vs Bill Length",
-    subtitle = "We get a dot plot but it is hard to see the distribution.",
-    x = "Bill Depth (mm)", 
-    y = "Species"
-  ) 
-```
-
-## Exercise 2.2.5
-
-What might be a better choice of geom ?
-
-```{r}
-#| echo: true
-#| warning: true
-#| output-location: column
-
-ggplot2::ggplot(
-  data = penguins, 
-  mapping = ggplot2::aes(
-    x = .data[["bill_length_mm"]], 
-    y = .data[["species"]])
-) + 
-  ggplot2::geom_boxplot() +
-ggplot2::theme(
-  axis.title.y = ggplot2::element_text(angle = 0)
-) +
-ggplot2::labs(
-    title = "Species vs Bill Length",
-    subtitle = "A box plot may be better.",
-    x = "Bill Depth (mm)", 
-    y = "Species"
-  ) 
-```
-
-## Exercise 2.2.5
-
-Why does the following give an error and how would you fix it?
-
-```{r}
-#| echo: true
-#| error: true
-#| warning: true
-#| output-location: column
-
-ggplot2::ggplot(data = penguins) + 
-  ggplot2::geom_point()
-```
-
-## Exercise 2.2.5
-
-We need to set mapping parameters using the `aes` function to tell `ggplot` which columns in `penguins` are used for the x or y axis respectively.
-
-```{r}
-#| echo: true
-#| warning: true
-#| output-location: column
-
-ggplot(data = penguins) + 
-  geom_point(
-    mapping = ggplot2::aes(
-    x = .data[["bill_depth_mm"]], 
-    y = .data[["bill_length_mm"]]  
-  )
-)
-```
-
-## Exercise 2.2.5
-
-What does the `na.rm` argument do in `geom_point()`? What is the default value of the argument? Create a scatterplot where you successfully use this argument set to TRUE.
-
-```{r}
-#| echo: true
-#| eval: false
-
-?ggplot2::geom_point()
-
-```
-
-```{=html}
-<iframe width="1000" height="400" src="https://ggplot2.tidyverse.org/reference/geom_point.html" title="geom_point Documentation" ></iframe>
-```
-
-## Exercise 2.2.5
-
-Warning message is removed.
-
-```{r}
-#| echo: true
-#| warning: true
-#| output-location: column
-
-ggplot2::ggplot(
-  data = penguins, 
-  mapping = ggplot2::aes(
-    x = .data[["bill_depth_mm"]], 
-    y = .data[["bill_length_mm"]])
-) + 
-  ggplot2::geom_point(
-    na.rm = TRUE,
-) +
-ggplot2::theme(
-  axis.title.y = ggplot2::element_text(angle = 0)
-) +
-ggplot2::labs(
-    title = "Bill depth vs Bill Length",
-    subtitle = "Small positive correaltion between bill depth and length.",
-    x = "Bill Length (mm)", 
-    y = "Bill Depth\n(mm)"
-  ) 
-
-```
-
-## Exercise 2.2.5
-
-Add the following caption to the plot you made in the previous exercise: “Data come from the `palmerpenguins` package.” Hint: Take a look at the documentation for `labs()`.
-
-```{r}
-#| echo: true
-#| warning: true
-#| output-location: column
-
-ggplot2::ggplot(
-  data = penguins, 
-  mapping = ggplot2::aes(
-    x = .data[["bill_depth_mm"]], 
-    y = .data[["bill_length_mm"]])
-) + 
-  ggplot2::geom_point(
-    na.rm = TRUE,
-) +
-ggplot2::theme(
-  axis.title.y = ggplot2::element_text(angle = 0)
-) +
-ggplot2::labs(
-    title = "Bill depth vs Bill Length",
-    subtitle = "Small positive correaltion between bill depth and length.",
-    caption = "Data come from the palmerpenguins package.",
-    x = "Bill Length (mm)", 
-    y = "Bill Depth\n(mm)"
-  ) 
-
-```
-
-## Exercise 2.2.5
-
-Add the following caption to the plot you made in the previous exercise: “Data come from the `palmerpenguins` package.” Hint: Take a look at the documentation for `labs()`.
-
-```{r}
-#| echo: true
-#| warning: true
-#| output-location: column
-
-ggplot2::ggplot(
-  data = penguins, 
-  mapping = ggplot2::aes(
-    x = .data[["bill_depth_mm"]], 
-    y = .data[["bill_length_mm"]])
-) + 
-  ggplot2::geom_point(
-    na.rm = TRUE,
-) +
-ggplot2::theme(
-  axis.title.y = ggplot2::element_text(angle = 0)
-) +
-ggplot2::labs(
-    title = "Bill depth vs Bill Length",
-    subtitle = "Small positive correaltion between bill depth and length.",
-    caption = "Data come from the palmerpenguins package.",
-    x = "Bill Length (mm)", 
-    y = "Bill Depth\n(mm)"
-  ) 
-
-```
-
-## Exercise 2.2.5
-
-Image replication
-
-```{r}
-#| echo: true
-#| warning: true
-#| output-location: column
-
-ggplot2::ggplot(
-  data = penguins, 
-  mapping = ggplot2::aes(
-    x = .data[["flipper_length_mm"]], 
-    y = .data[["body_mass_g"]])
-  ) + 
-  ggplot2::geom_point(
-    mapping = ggplot2::aes(
-      color = .data[["bill_depth_mm"]]
-    )
-  ) +
-  ggplot2::geom_smooth()
-
-```
-
-## Exercise 2.2.5
-
-What does `se = FALSE` in `geom_smooth` do ? It plots the smooth line without confidence interval.
-
-```{r}
-#| echo: true
-#| warning: true
-#| output-location: column
-
-ggplot2::ggplot(
-  data = penguins,
-  mapping = ggplot2::aes(
-    x = .data[["flipper_length_mm"]], 
-    y = .data[["body_mass_g"]], 
-    color = .data[["island"]])
-) +
-  ggplot2::geom_point() +
-  ggplot2::geom_smooth(se = FALSE)
-
-```
-
-## Exercise 2.2.5
-
-What is the output difference between these two codes ? There is no difference.
-
-:::: {.columns}
-
-::: {.column width="50%"}
-
-```{r}
-#| echo: true
-
-ggplot2::ggplot(
-  data = penguins,
-  mapping = ggplot2::aes(
-    x = .data[["flipper_length_mm"]], 
-    y = .data[["body_mass_g"]])
-) +
-  ggplot2::geom_point() +
-  ggplot2::geom_smooth()
-```
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
 
 :::
-
-::: {.column width="50%"}
-
-```{r}
-#| echo: true
-
-ggplot2::ggplot() + 
-ggplot2::geom_point(
-  data = penguins,
-  mapping = ggplot2::aes(
-      x = .data[["flipper_length_mm"]], 
-      y = .data[["body_mass_g"]])
-) +
-ggplot2::geom_smooth(
-  data = penguins,
-  mapping = ggplot2::aes(
-      x = .data[["flipper_length_mm"]], 
-      y = .data[["body_mass_g"]])
-  )
-```
-
-:::
-
-::::
 
 ## `ggplot2` calls
 
@@ -1067,6 +773,13 @@ penguins |>
 
 ::::
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## `ggplot2` calls
 
 When is `flipper_length_mm` and `body_mass_g` a variable or column name ? We can use `.data` to differentiate them.
@@ -1078,6 +791,8 @@ When is `flipper_length_mm` and `body_mass_g` a variable or column name ? We can
 ```{r}
 #| echo: true
 #| error: true
+#| fig-height: 4
+#| fig-alt: "A scatterplot of body mass in grams vs flipper length in mm."
 
 flipper_length_mm = "Flipper Length in mm"
 body_mass_g = "Body Mass in g"
@@ -1100,6 +815,8 @@ penguins |>
 
 ```{r}
 #| echo: true
+#| fig-height: 4
+#| fig-alt: "A scatterplot of body mass in grams vs flipper length in mm."
 
 flipper_length_mm = "Flipper Length in mm"
 body_mass_g = "Body Mass in g"
@@ -1120,6 +837,447 @@ penguins |>
 
 ::::
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## Exercise 2.2.5
+
+How many rows are in `penguins`? How many columns?
+
+```{r}
+#| echo: true
+
+glue::glue("
+  There are {nrow(penguins)} rows and {ncol(penguins)} columns in the penguin data set
+  "
+)
+```
+
+A little preview of `glue` from Chapter 15.
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## Exercise 2.2.5
+
+What does the `bill_depth_mm` variable in the `penguins` data frame describe? Read the help for ?penguins to find out.
+
+```{r}
+#| echo: true
+#| eval: false
+
+?penguins
+
+```
+
+<br>
+
+```{=html}
+<iframe width="1000" height="400" src="https://allisonhorst.github.io/palmerpenguins/reference/penguins.html" title="Penguin Documentation" ></iframe>
+```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## Exercise 2.2.5
+
+Make a scatterplot of `bill_depth_mm` vs. `bill_length_mm`. Describe the relationship between these two variables.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+#| code-line-numbers: "|4-5,7"
+#| fig-height: 7
+#| fig-alt: "A scatterplot of penguin's body depth in mm vs bill length in mm."
+
+ggplot2::ggplot(
+  data = penguins, 
+  mapping = ggplot2::aes(
+    x = .data[["bill_depth_mm"]], 
+    y = .data[["bill_length_mm"]])
+) + 
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Bill depth vs Bill Length",
+    subtitle = "Small positive correaltion between bill depth and length.",
+    x = "Bill Length (mm)", 
+    y = "Bill Depth\n(mm)"
+  ) 
+```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## Exercise 2.2.5
+
+What happens if you make a scatterplot of `species` vs. `bill_depth_mm` ?
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+#| code-line-numbers: "|5"
+#| fig-height: 7
+#| fig-alt: "A scatterplot of species vs bill length in mm."
+
+ggplot2::ggplot(
+  data = penguins, 
+  mapping = ggplot2::aes(
+    x = .data[["bill_length_mm"]], 
+    y = .data[["species"]])
+) + 
+  ggplot2::geom_point() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Species vs Bill Length",
+    subtitle = "We get a dot plot but it is hard to see the distribution.",
+    x = "Bill Depth (mm)", 
+    y = "Species"
+  ) 
+```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## Exercise 2.2.5
+
+What might be a better choice of geom ?
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+#| code-line-numbers: "|7"
+#| fig-height: 7
+#| fig-alt: "A boxplot of bill length in mm for each species."
+
+ggplot2::ggplot(
+  data = penguins, 
+  mapping = ggplot2::aes(
+    x = .data[["bill_length_mm"]], 
+    y = .data[["species"]])
+) + 
+  ggplot2::geom_boxplot() +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Species vs Bill Length",
+    subtitle = "A box plot may be better.",
+    x = "Bill Depth (mm)", 
+    y = "Species"
+  ) 
+```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+
+## Exercise 2.2.5
+
+Why does the following give an error and how would you fix it?
+
+```{r}
+#| echo: true
+#| error: true
+#| warning: true
+#| output-location: column
+
+ggplot2::ggplot(data = penguins) + 
+  ggplot2::geom_point()
+```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## Exercise 2.2.5
+
+We need to set mapping parameters using the `aes` function to tell `ggplot` which columns in `penguins` are used for the x or y axis respectively.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+#| code-line-numbers: "|3-5"
+#| fig-height: 7
+#| fig-alt: "A scatterplot of bill depth in mm vs bill length in mm."
+
+ggplot(data = penguins) + 
+  geom_point(
+    mapping = ggplot2::aes(
+    x = .data[["bill_depth_mm"]], 
+    y = .data[["bill_length_mm"]]  
+  )
+)
+```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## Exercise 2.2.5
+
+What does the `na.rm` argument do in `geom_point()`? What is the default value of the argument? Create a scatterplot where you successfully use this argument set to `TRUE`.
+
+```{r}
+#| echo: true
+#| eval: false
+
+?ggplot2::geom_point()
+
+```
+
+<br>
+
+```{=html}
+<iframe width="1000" height="400" src="https://ggplot2.tidyverse.org/reference/geom_point.html" title="geom_point Documentation" ></iframe>
+```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## Exercise 2.2.5
+
+Warning message is removed.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+#| code-line-numbers: "|8"
+#| fig-height: 7
+#| fig-alt: "A scatterplot of bill depth in mm vs bill length in mm."
+
+ggplot2::ggplot(
+  data = penguins, 
+  mapping = ggplot2::aes(
+    x = .data[["bill_depth_mm"]], 
+    y = .data[["bill_length_mm"]])
+) + 
+  ggplot2::geom_point(
+    na.rm = TRUE,
+) +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Bill depth vs Bill Length",
+    subtitle = "Small positive correaltion between bill depth and length.",
+    x = "Bill Length (mm)", 
+    y = "Bill Depth\n(mm)"
+  ) 
+
+```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## Exercise 2.2.5
+
+Add the following caption to the plot you made in the previous exercise: “Data come from the `palmerpenguins` package.” Hint: Take a look at the documentation for `labs()`.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+#| code-line-numbers: "|16"
+#| fig-height: 7
+#| fig-alt: "A scatterplot of bill depth in mm vs bill length in mm with caption."
+
+ggplot2::ggplot(
+  data = penguins, 
+  mapping = ggplot2::aes(
+    x = .data[["bill_depth_mm"]], 
+    y = .data[["bill_length_mm"]])
+) + 
+  ggplot2::geom_point(
+    na.rm = TRUE,
+) +
+ggplot2::theme(
+  axis.title.y = ggplot2::element_text(angle = 0)
+) +
+ggplot2::labs(
+    title = "Bill depth vs Bill Length",
+    subtitle = "Small positive correaltion between bill depth and length.",
+    caption = "Data come from the palmerpenguins package.",
+    x = "Bill Length (mm)", 
+    y = "Bill Depth\n(mm)"
+  ) 
+
+```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## Exercise 2.2.5
+
+Image replication
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+#| fig-height: 7
+#| fig-alt: "A scatterplot of body mass in grams vs flipper length in mm, coloured by bill depth with a smooth curve."
+
+ggplot2::ggplot(
+  data = penguins, 
+  mapping = ggplot2::aes(
+    x = .data[["flipper_length_mm"]], 
+    y = .data[["body_mass_g"]])
+  ) + 
+  ggplot2::geom_point(
+    mapping = ggplot2::aes(
+      color = .data[["bill_depth_mm"]]
+    )
+  ) +
+  ggplot2::geom_smooth()
+
+```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## Exercise 2.2.5
+
+What does `se = FALSE` in `geom_smooth` do ? It plots the smooth line without confidence interval.
+
+```{r}
+#| echo: true
+#| warning: true
+#| output-location: column
+#| code-line-numbers: "|9"
+#| fig-height: 6
+#| fig-alt: "A scatterplot of body mass in grams vs flipper length in mm, coloured by each island, with a smooth curve without confidence interval plotted for each island."
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["flipper_length_mm"]], 
+    y = .data[["body_mass_g"]], 
+    color = .data[["island"]])
+) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth(se = FALSE)
+
+```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## Exercise 2.2.5
+
+What is the output difference between these two codes ? There is no difference.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| fig-alt: "A scatterplot of body mass in grams vs flipper length in mm with a smooth curve."
+
+ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+    x = .data[["flipper_length_mm"]], 
+    y = .data[["body_mass_g"]])
+) +
+  ggplot2::geom_point() +
+  ggplot2::geom_smooth()
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| fig-alt: "A scatterplot of body mass in grams vs flipper length in mm with a smooth curve."
+
+ggplot2::ggplot() + 
+ggplot2::geom_point(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = .data[["flipper_length_mm"]], 
+      y = .data[["body_mass_g"]])
+) +
+ggplot2::geom_smooth(
+  data = penguins,
+  mapping = ggplot2::aes(
+      x = .data[["flipper_length_mm"]], 
+      y = .data[["body_mass_g"]])
+  )
+```
+
+:::
+
+::::
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Visualising Distributions
 
 For categorical variables, we can view the distribution using bar charts.
@@ -1128,6 +1286,9 @@ For categorical variables, we can view the distribution using bar charts.
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|7"
+#| fig-height: 7
+#| fig-alt: "A barchart showing the count of each penguin species."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1139,14 +1300,24 @@ ggplot2::geom_bar()
 
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Visualising Distributions
 
-To arrange them based on frequencies, we can use `fct_infreq` to convert the categorical variable to a factor and reorder the level of the factor based on the frequencies.
+To arrange them based on frequencies, we can use `fct_infreq` to convert the categorical variable to a factor and reorder the level of the factor based on the frequencies. More on Chapter 17.
 
 ```{r}
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|4"
+#| fig-height: 7
+#| fig-alt: "A barchart showing the count of each penguin species. This time, the species are sorted by their frequencies."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1158,6 +1329,14 @@ ggplot2::geom_bar()
 
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+
 ## Visualising Distributions
 
 For numerical variables, we can view the distribution using histograms.
@@ -1166,6 +1345,9 @@ For numerical variables, we can view the distribution using histograms.
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|7-8"
+#| fig-height: 7
+#| fig-alt: "A histogram showing the distribution of the penguin's body mass in grams."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1178,6 +1360,13 @@ ggplot2::geom_histogram(
 
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Visualising Distributions
 
 We may need to adjust the `binwidth` argument if necessary.
@@ -1186,6 +1375,9 @@ We may need to adjust the `binwidth` argument if necessary.
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|7-8"
+#| fig-height: 7
+#| fig-alt: "A histogram showing the distribution of the penguin's body mass in grams with binwidth set to 20."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1198,14 +1390,24 @@ ggplot2::geom_histogram(
 
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Visualising Distributions
 
-We may need to adjust the `binwidth` argument if necessary.
+You can specify a function for calculating `binwidth`. More info about functions in Chapter 26.
 
 ```{r}
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|7-8"
+#| fig-height: 7
+#| fig-alt: "A histogram showing the distribution of the penguin's body mass in grams with binwidth set by a function."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1214,9 +1416,16 @@ ggplot2::ggplot(
     )
 ) + 
 ggplot2::geom_histogram(
-  binwidth = 2000)
+  binwidth = function(x) 2 * stats::IQR(x) / (length(x)^(1/3)))
 
 ```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
 
 ## Visualising Distributions
 
@@ -1226,6 +1435,9 @@ Alternatively, we can view the distribution using density plot.
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|7"
+#| fig-height: 7
+#| fig-alt: "A density plot showing the distribution of the penguin's body mass in grams."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1237,9 +1449,16 @@ ggplot2::geom_density()
 
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Exercise 2.4.3
 
-Make a bar plot of species of penguins, where you assign species to the y aesthetic (instead of x). How is this plot different?
+Make a bar plot of species of penguins, where you assign species to the `y` aesthetic (instead of `x`). How is this plot different?
 
 :::: {.columns}
 
@@ -1247,6 +1466,9 @@ Make a bar plot of species of penguins, where you assign species to the y aesthe
 
 ```{r}
 #| echo: true
+#| code-line-numbers: "|4"
+#| fig-height: 7
+#| fig-alt: "A vertical barchart showing the count of each penguin species."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1262,6 +1484,9 @@ ggplot2::ggplot(
 
 ```{r}
 #| echo: true
+#| code-line-numbers: "|4"
+#| fig-height: 7
+#| fig-alt: "A horizontal barchart showing the count of each penguin species."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1275,9 +1500,16 @@ ggplot2::ggplot(
 
 ::::
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Exercise 2.4.3
 
-Which aesthetic, color or fill, is more useful for changing the color of bars?
+Which aesthetic, `color` or `fill`, is more useful for changing the color of bars?
 
 :::: {.columns}
 
@@ -1285,6 +1517,9 @@ Which aesthetic, color or fill, is more useful for changing the color of bars?
 
 ```{r}
 #| echo: true
+#| code-line-numbers: "|7"
+#| fig-height: 7
+#| fig-alt: "A vertical barchart showing the count of each penguin species. Border of the bars are green."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1302,6 +1537,9 @@ ggplot2::ggplot(
 
 ```{r}
 #| echo: true
+#| code-line-numbers: "|7"
+#| fig-height: 7
+#| fig-alt: "A vertical barchart showing the count of each penguin species. Interior colour of the bars are green."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1317,6 +1555,13 @@ ggplot2::ggplot(
 
 ::::
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Exercise 2.4.3
 
 What does the bins argument in `geom_histogram` do?
@@ -1327,6 +1572,9 @@ What does the bins argument in `geom_histogram` do?
 
 ```{r}
 #| echo: true
+#| code-line-numbers: "|8"
+#| fig-height: 7
+#| fig-alt: "A histogram showing the penguin's body mass in grams using 5 bins."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1344,6 +1592,9 @@ ggplot2::geom_histogram(
 
 ```{r}
 #| echo: true
+#| code-line-numbers: "|8"
+#| fig-height: 7
+#| fig-alt: "A histogram showing the penguin's body mass in grams using 10 bins."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1359,6 +1610,13 @@ ggplot2::geom_histogram(
 
 ::::
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Exercise 2.4.3
 
 Make a histogram of the `carat` variable in the `diamonds` dataset that is available when you load the tidyverse package. Experiment with different binwidths. What binwidth reveals the most interesting patterns?
@@ -1369,6 +1627,9 @@ Make a histogram of the `carat` variable in the `diamonds` dataset that is avail
 
 ```{r}
 #| echo: true
+#| code-line-numbers: "|8"
+#| fig-height: 5
+#| fig-alt: "A histogram showing the diamond's caret using binwidth of 1."
 
 ggplot2::ggplot(
   data = diamonds,
@@ -1386,6 +1647,9 @@ ggplot2::geom_histogram(
 
 ```{r}
 #| echo: true
+#| code-line-numbers: "|8"
+#| fig-height: 5
+#| fig-alt: "A histogram showing the diamond's caret using binwidth of 0.01."
 
 ggplot2::ggplot(
   data = diamonds,
@@ -1401,6 +1665,13 @@ ggplot2::geom_histogram(
 
 ::::
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Visualising Relationships
 
 We can use a side-by-side boxplot to view the relationship between a numerical and a categorical variable.
@@ -1409,6 +1680,9 @@ We can use a side-by-side boxplot to view the relationship between a numerical a
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|8"
+#| fig-height: 7
+#| fig-alt: "Boxplots of the penguin's body mass in grams for each species."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1421,6 +1695,13 @@ ggplot2::geom_boxplot()
 
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Visualising Relationships
 
 Alternatively, we can view the distribution using density plot. We use `linewidth = 0.75` to make the lines stand out a bit more against the background.
@@ -1429,9 +1710,12 @@ Alternatively, we can view the distribution using density plot. We use `linewidt
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|8-10"
+#| fig-height: 7
+#| fig-alt: "Density plots of the penguin's body mass in grams for each species."
 
 ggplot2::ggplot(
-  data = penguins,
+    data = penguins,
   mapping = ggplot2::aes(
      x = body_mass_g, 
      color = species
@@ -1441,6 +1725,13 @@ ggplot2::geom_density(
   linewidth = 0.75
 )
 ```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
 
 ## Visualising Relationships
 
