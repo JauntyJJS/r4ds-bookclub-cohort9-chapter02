@@ -1741,6 +1741,9 @@ Additionally, we can set `fill = species` and use `alpha` to add transparency to
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|5-6,10-11"
+#| fig-height: 7
+#| fig-alt: "Density plots of the penguin's body mass in grams for each species with filled colours."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1756,6 +1759,13 @@ ggplot2::geom_density(
 )
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Visualising Relationships
 
 Stacked bar plots are useful to visualize the relationship between two categorical variables.
@@ -1764,6 +1774,9 @@ Stacked bar plots are useful to visualize the relationship between two categoric
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|5,8"
+#| fig-height: 7
+#| fig-alt: "A stacked bar plot of showing the count of each penguin's species in each island."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1775,6 +1788,13 @@ ggplot2::ggplot(
 ggplot2::geom_bar()
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Visualising Relationships
 
 By setting `position = "fill"`, we create a relative frequency plot.
@@ -1783,6 +1803,9 @@ By setting `position = "fill"`, we create a relative frequency plot.
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|9"
+#| fig-height: 7
+#| fig-alt: "A relative frequency plot showing the proportion of each penguin's species living in each island."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1796,6 +1819,13 @@ ggplot2::geom_bar(
 )
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Visualising Relationships
 
 Scatterplots are useful to visualize the relationship between two numerical variables.
@@ -1804,6 +1834,9 @@ Scatterplots are useful to visualize the relationship between two numerical vari
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|9"
+#| fig-height: 7
+#| fig-alt: "A scatterplot of the penguin's body mass in grams vs flipper length in mm."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1815,6 +1848,13 @@ ggplot2::ggplot(
 ggplot2::geom_point()
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Visualising Relationships
 
 To visualize the relationship between three or more variables. Things get a bit tricky. For example, we can let colors of points represent species and the shapes of points represent islands but it is hard to see anything meaningful.
@@ -1823,6 +1863,9 @@ To visualize the relationship between three or more variables. Things get a bit 
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|10-11"
+#| fig-height: 7
+#| fig-alt: "A scatterplot of the penguin's body mass in grams vs flipper length in mm. The colours represent different species and the shapes represent different islands."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1839,6 +1882,13 @@ ggplot2::geom_point(
 )
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Visualising Relationships
 
 To counter this issue we can split plots into different facets, subplots that each display one subset of the data, using `facet_wrap`
@@ -1847,6 +1897,9 @@ To counter this issue we can split plots into different facets, subplots that ea
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|14-16"
+#| fig-height: 7
+#| fig-alt: "A facet of scatterplots showing the penguin's body mass in grams vs flipper length in mm. The colours and shapes represent different species. The different facets are splitted based on the differnt islands."
 
 ggplot2::ggplot(
   data = penguins,
@@ -1866,6 +1919,13 @@ ggplot2::facet_wrap(
 )
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Exercise 2.5.5
 
 Which variables in mpg are categorical? Which variables are numerical? How can you see this information when you run mpg? Unfortunately `?mpg` is not so clear.
@@ -1878,9 +1938,18 @@ Which variables in mpg are categorical? Which variables are numerical? How can y
 
 ```
 
+<br>
+
 ```{=html}
 <iframe width="1000" height="400" src="https://ggplot2.tidyverse.org/reference/mpg.html" title="mpg Documentation" ></iframe>
 ```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
 
 ## Exercise 2.5.5
 
@@ -1893,6 +1962,13 @@ dplyr::glimpse(mpg)
 
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Exercise 2.5.5
 
 Make a scatterplot of `hwy` vs. `displ` using the mpg data frame
@@ -1901,6 +1977,8 @@ Make a scatterplot of `hwy` vs. `displ` using the mpg data frame
 #| echo: true
 #| warning: true
 #| output-location: column
+#| fig-height: 7
+#| fig-alt: "A scatterplot showing the car's highway miles per gallon vs engine displacement in litres."
 
 ggplot2::ggplot(
   data = mpg,
@@ -1921,7 +1999,7 @@ ggplot2::labs(
 
 ## Exercise 2.5.5
 
-Next, map a third, numerical/categorical variable to color, then size, then both color and size, then shape
+Next, map a third, numerical/categorical variable to `color`, then `size`, then both `color` and `size`, then `shape`
 
 ::: {.panel-tabset}
 
@@ -1931,6 +2009,9 @@ Next, map a third, numerical/categorical variable to color, then size, then both
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|6"
+#| fig-height: 7
+#| fig-alt: "A scatterplot showing the car's highway miles per gallon vs engine displacement in litres coloured by city miles per gallon."
 
 ggplot2::ggplot(
   data = mpg,
@@ -1957,6 +2038,9 @@ ggplot2::labs(
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|6"
+#| fig-height: 7
+#| fig-alt: "A scatterplot showing the car's highway miles per gallon vs engine displacement in litres coloured by the type of cars."
 
 ggplot2::ggplot(
   data = mpg,
@@ -1983,6 +2067,9 @@ ggplot2::labs(
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|6"
+#| fig-height: 7
+#| fig-alt: "A scatterplot showing the car's highway miles per gallon vs engine displacement in litres. The size is based on the city miles per gallon."
 
 ggplot2::ggplot(
   data = mpg,
@@ -2009,6 +2096,9 @@ ggplot2::labs(
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|6"
+#| fig-height: 7
+#| fig-alt: "A scatterplot showing the car's highway miles per gallon vs engine displacement in litres. The size is based on the type of car."
 
 ggplot2::ggplot(
   data = mpg,
@@ -2028,6 +2118,13 @@ ggplot2::labs(
   ) 
 
 ```
+
+:::
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
 
 :::
 
