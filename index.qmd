@@ -2987,13 +2987,15 @@ https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
 
 Spelling mistakes (Pics from [Allison Horst](https://allisonhorst.com/))
 
-![](images/Spelling.png){fig-alt="A comic showing a Crocodile programmer getting angry that because he does not know the error was caused by a spelling mistake until a Flamingo programmer steps in to help."}
 ::: footer
 
 https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
 [`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
 
 :::
+
+![](images/Spelling.png){fig-alt="A comic showing a Crocodile programmer getting angry that because he does not know the error was caused by a spelling mistake until a Flamingo programmer steps in to help."}
+
 
 ## Common Problems
 
@@ -3006,6 +3008,7 @@ Plus in wrong place
 ```{r}
 #| echo: true
 #| error: true
+#| fig-alt: "An empty plot."
 
 ggplot2::ggplot(data = mpg) 
 + ggplot2::geom_point(
@@ -3020,6 +3023,7 @@ ggplot2::ggplot(data = mpg)
 ```{r}
 #| echo: true
 #| error: true
+#| fig-alt: "A scatterplot of the car's engine displacemen in litres vs highway miles per gallon."
 
 ggplot2::ggplot(data = mpg) + 
   ggplot2::geom_point(
@@ -3037,6 +3041,13 @@ Chapter 2 helps you learn the basics of `ggplot2`. More `ggplot2` related techni
 
 The rest of my slides are some thorny "issues" that I have faced when using `ggplot2` and how I handle them (after hours of searching).
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Extra
 
 Not enough discrete colours. Check out `ggthemes::tableau_color_pal`
@@ -3049,6 +3060,13 @@ scales::show_col(
   ncol = 6)
 
 ```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
 
 ## Extra
 
@@ -3063,6 +3081,13 @@ scales::show_col(
 
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Extra
 
 Both colour-blind friendly discrete and continunus colours. Check out [microshades](https://github.com/KarstensLab/microshades)
@@ -3070,6 +3095,13 @@ Both colour-blind friendly discrete and continunus colours. Check out [microshad
 ```{=html}
 <iframe width="1000" height="500" src="https://karstenslab.github.io/microshades/" title="microshades homepage" ></iframe>
 ```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
 
 ## Extra
 
@@ -3079,6 +3111,13 @@ Both colour-blind friendly discrete and continunus colours. Check out [microshad
 <iframe width="1000" height="500" src="https://www.youtube.com/embed/iVIfLW2VU5M" frameborder="0" allowfullscreen></iframe>
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Extra
 
 Not enough shapes. Check out [`ggstars`](https://github.com/xiangpin/ggstar/)
@@ -3087,13 +3126,42 @@ Not enough shapes. Check out [`ggstars`](https://github.com/xiangpin/ggstar/)
 <iframe width="1000" height="500" src="https://cran.r-project.org/web/packages/ggstar/vignettes/ggstar.html" title="ggstar homepage" ></iframe>
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Extra
 
-Need to label your bar charts. Check out [`ggfittext`](https://github.com/wilkox/ggfittext)
+Facing long axis labels. See [Andrew Heiss's blog](https://www.andrewheiss.com/blog/2022/06/23/long-labels-ggplot/).
+
+```{=html}
+<iframe width="1000" height="500" src="https://www.andrewheiss.com/blog/2022/06/23/long-labels-ggplot/" title="Andrew Heiss blog" ></iframe>
+```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## Extra
+
+Need to label your bar charts. Consider [`ggfittext`](https://github.com/wilkox/ggfittext)
 
 ```{=html}
 <iframe width="1000" height="500" src="https://wilkox.org/ggfittext/" title="ggfittext homepage" ></iframe>
 ```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
 
 ## Extra
 
@@ -3103,6 +3171,9 @@ Need to label your bar charts quickly. Consider [`ggfittext`](https://github.com
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|12"
+#| fig-height: 7
+#| fig-alt: "A barchart plot showing the frequency of each penguin's species with labels."
 
 island_count <- penguins |>
   dplyr::reframe(count = dplyr::n(), .by = c("species"))
@@ -3121,6 +3192,13 @@ ggplot2::theme(
 )
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Extra
 
 Need to add text annotation. Consider [`ggtext`](https://github.com/wilkelab/ggtext/).
@@ -3128,6 +3206,13 @@ Need to add text annotation. Consider [`ggtext`](https://github.com/wilkelab/ggt
 ```{=html}
 <iframe width="1000" height="500" src="https://wilkelab.org/ggtext/" title="ggtext homepage" ></iframe>
 ```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
 
 ## Extra
 
@@ -3137,6 +3222,9 @@ Here is my example.
 #| echo: true
 #| warning: true
 #| output-location: column
+#| code-line-numbers: "|4-6,17,19,26-28"
+#| fig-height: 7
+#| fig-alt: "A barchart plot showing the frequency of each penguin's species with labels."
 
 island_count <- penguins |>
   dplyr::reframe(count = dplyr::n(), .by = c("species"))
@@ -3169,6 +3257,13 @@ ggplot2::labs(
   )
 ```
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Extra
 
 See [Royal Statistical Society Best Practices for Data Visualisation](https://royal-statistical-society.github.io/datavisguide/docs/styling.html) and [Cara Thompsom's NHRS 2022 Talk](https://www.cararthompson.com/talks/nhsr2022-level-up/) for more `ggtext` examples.
@@ -3193,6 +3288,79 @@ See [Royal Statistical Society Best Practices for Data Visualisation](https://ro
 
 ::::
 
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## Extra
+
+Don't know which plot your client wants. Create buttons using `download_this` in your html document.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| eval: false
+
+penguin_plot <- ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = .data[["flipper_length_mm"]], 
+     y = .data[["body_mass_g"]]
+    )
+) + 
+ggplot2::geom_point()
+
+downloadthis::download_this(
+  penguin_plot,
+  output_name = "penguin-plot",
+  ggsave_args = list(width = 6, height = 7))
+
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| fig-height: 7
+#| fig-alt: "A scatterplot of penguin's body mass in grams vs flipper length in mm"
+
+penguin_plot <- ggplot2::ggplot(
+  data = penguins,
+  mapping = ggplot2::aes(
+     x = .data[["flipper_length_mm"]], 
+     y = .data[["body_mass_g"]]
+    )
+) + 
+ggplot2::geom_point()
+
+penguin_plot
+
+downloadthis::download_this(
+  penguin_plot,
+  output_name = "penguin-plot",
+  ggsave_args = list(width = 6, height = 7))
+
+```
+
+:::
+
+::::
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
 ## Extra
 
 Learn from `ggplot2` mishaps. See [Kara Woo's RStudio 2020 Conference talk](https://www.youtube.com/watch?v=izV-qK3nlhA).
@@ -3200,3 +3368,10 @@ Learn from `ggplot2` mishaps. See [Kara Woo's RStudio 2020 Conference talk](http
 ```{=html}
 <iframe width="1000" height="500" src="https://www.youtube.com/embed/izV-qK3nlhA" frameborder="0" allowfullscreen></iframe>
 ```
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
