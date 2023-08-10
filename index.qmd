@@ -3405,6 +3405,11 @@ penguin_plot <- ggplot2::ggplot(
     )
 ) + 
 ggplot2::geom_point()
+```
+
+```{r}
+#| echo: true
+#| eval: false
 
 downloadthis::download_this(
   penguin_plot,
@@ -3432,12 +3437,13 @@ penguin_plot <- ggplot2::ggplot(
 ggplot2::geom_point()
 
 penguin_plot
+```
 
+```{r}
 downloadthis::download_this(
   penguin_plot,
   output_name = "penguin-plot",
   ggsave_args = list(width = 6, height = 7))
-
 ```
 
 :::
@@ -3453,7 +3459,7 @@ https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
 
 ## Extra
 
-Learn from `ggplot2` mishaps. See [Kara Woo's RStudio 2020 Conference talk](https://www.youtube.com/watch?v=izV-qK3nlhA).
+Learn from `ggplot2` mishaps. See [Kara Woo's RStudio 2021 Conference talk](https://www.youtube.com/watch?v=izV-qK3nlhA).
 
 ```{=html}
 <iframe width="1000" height="500" src="https://www.youtube.com/embed/izV-qK3nlhA" frameborder="0" allowfullscreen></iframe>
