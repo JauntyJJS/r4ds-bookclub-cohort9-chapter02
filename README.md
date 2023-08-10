@@ -1,0 +1,9 @@
+# R4DS 2nd Edition Chapter 2 slides for R4DS Book Club Cohort 9
+
+Here are the [source
+code](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02) for
+my [slides](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02)
+presented for [R4DS Book Club Cohort
+9](https://www.youtube.com/playlist?list=PL3x6DOfs2NGjVMs1NtbWu4s_ZgGhGKnrN)
+
+![](share-card.png)
