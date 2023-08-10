@@ -713,7 +713,7 @@ https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
 
 :::
 
-## Creating a `ggplot`
+## Creating a `ggplot` (Extra)
 
 In Google Chrome, we can go to Developer's mode (Press F12), press Three Dots, press More tools, press Rendering, scroll down to Emulate vision deficiencies and make changes.
 
@@ -758,7 +758,9 @@ https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
 
 ## `ggplot2` calls
 
-There is a concise way of using ggplot2 code to that saves typing. In general, we want to reduce the amount of extra text to make it easier to compare simialr codes.
+There is a concise way of using ggplot2 code to that saves typing. In general, we want to reduce the amount of extra text to make it easier to compare similar codes. 
+
+More information will be provided in Chapter 4 when we’ll learn about the pipe, `|>` and Chapter 26 where we'll look into coding style.
 
 :::: {.columns}
 
@@ -803,7 +805,7 @@ https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
 
 :::
 
-## `ggplot2` calls
+## `ggplot2` calls (Extra)
 
 When is `flipper_length_mm` and `body_mass_g` a variable or column name ? We can use `.data` to differentiate them.
 
@@ -814,6 +816,7 @@ When is `flipper_length_mm` and `body_mass_g` a variable or column name ? We can
 ```{r}
 #| echo: true
 #| error: true
+#| code-line-numbers: "|7-8,11-12"
 #| fig-height: 4
 #| fig-alt: "A scatterplot of body mass in grams vs flipper length in mm."
 
@@ -838,6 +841,7 @@ penguins |>
 
 ```{r}
 #| echo: true
+#| code-line-numbers: "|7-8,11-12"
 #| fig-height: 4
 #| fig-alt: "A scatterplot of body mass in grams vs flipper length in mm."
 
@@ -853,6 +857,68 @@ penguins |>
   ggplot2::labs(
     x = flipper_length_mm,
     y = body_mass_g
+  )
+```
+
+:::
+
+::::
+
+::: footer
+
+https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02
+[`r fontawesome::fa(name = "link")`](https://jauntyjjs.github.io/r4ds-bookclub-cohort9-chapter02/) [`r fontawesome::fa(name = "github")`](https://github.com/JauntyJJS/r4ds-bookclub-cohort9-chapter02)
+
+:::
+
+## `ggplot2` calls (Extra)
+
+Set `axis.title.y = ggplot2::element_text(angle = 0)` in `ggplot2::theme` to rotate the y axis title.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| error: true
+#| fig-height: 4
+#| fig-alt: "A scatterplot of body mass in grams vs flipper length in mm."
+
+penguins |> 
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = .data[["flipper_length_mm"]],
+      y = .data[["body_mass_g"]])) + 
+  ggplot2::geom_point() +
+  ggplot2::labs(
+    x = "Flipper Length in mm",
+    y = "Body Mass in g"
+  )
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|7-9"
+#| fig-height: 4
+#| fig-alt: "A scatterplot of body mass in grams vs flipper length in mm with the y axis title rotated."
+
+penguins |> 
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = .data[["flipper_length_mm"]],
+      y = .data[["body_mass_g"]])) + 
+  ggplot2::geom_point() +
+  ggplot2::theme(
+    axis.title.y = ggplot2::element_text(angle = 0)
+  ) +
+  ggplot2::labs(
+    x = "Flipper Length in mm",
+    y = "Body Mass in g"
   )
 ```
 
