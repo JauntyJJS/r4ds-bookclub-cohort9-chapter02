@@ -56,6 +56,7 @@ library(scales)
 library(glue)
 library(ggfittext)
 library(ggtext)
+library(downloadthis)
 ```
 
 ::: footer
